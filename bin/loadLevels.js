@@ -1,6 +1,8 @@
 var fs = require('fs'),
     readline = require('readline'),
-    pathLevels = "/home/victorsodre/development/languages/js/p5/sokoban/sokoban_levels.txt"
+    path = require('path');
+
+const pathLevels = path.join(__dirname, '../config', 'sokoban_levels.txt');
 
 var rd = readline.createInterface({
     input: fs.createReadStream(pathLevels),
@@ -42,7 +44,7 @@ rd.on('line', function(line) {
 
 // Write a js file with a list with all the levels
 rd.on('close', function(line) {
-  let jsFile = "/home/victorsodre/development/languages/js/p5/sokoban/loadedLevels.js";
+  let jsFile = path.join(__dirname, '../dist/', 'loadedLevels.js');
   let data = "const allLevels = ".concat(JSON.stringify(levels));
   fs.writeFile(jsFile, data);
 })
